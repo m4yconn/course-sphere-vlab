@@ -3,6 +3,7 @@ import { User } from "../types/user";
 import { hashPassword } from "../utils/crypto";
 
 export const UserService = {
+    
     create: async (data: User) => {
         const existingUser = await UserRepository.findByEmail(data.email);
         if(existingUser) {
@@ -10,9 +11,16 @@ export const UserService = {
         }
 
         data.password = hashPassword(data.password);
-        const { _id, name, email} = await UserRepository.create(data);
+        return await UserRepository.create(data);
+    },
+
+    findByEmail: async (email: string) => {
+        const user= await UserRepository.findByEmail(email);
+        if(!user) {
+            throw new Error("Email invalido");
+        }
         
-        return { _id, name, email}; 
+        return user
     }
 
 }
