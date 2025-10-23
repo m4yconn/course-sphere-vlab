@@ -1,11 +1,14 @@
 import { connectDB } from "./config/db.config"
-import express from "express"
 
 import { userRouter } from "./routes/user.route";
 import { authRouter } from "./routes/auth.route";
 
+import express from "express"
+import cors from "cors"
+
 const app = express();
 
+app.use(cors({ origin: "*" }))
 app.use(express.json());
 app.use(userRouter);
 app.use(authRouter);
