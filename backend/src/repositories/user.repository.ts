@@ -9,5 +9,9 @@ export const UserRepository = {
 
     findByEmail: async (email: string) => {
         return await UserModel.findOne({ email });
+    },
+
+    findByID: async (id: string) => {
+        return await UserModel.findById(id);
     }
 }

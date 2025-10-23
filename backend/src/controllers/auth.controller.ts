@@ -17,4 +17,5 @@ export const AuthController = {
             return res.status(401)
         }
     }
+
 }

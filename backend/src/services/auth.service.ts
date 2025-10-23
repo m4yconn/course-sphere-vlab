@@ -23,7 +23,7 @@ export const AuthService = {
 
     verifyToken: (token: string) => {
         try {
-            return jwt.verify(token, authSecret);
+            return jwt.verify(token, authSecret) as { _id: string };
         }
         catch(err) {
             throw new Error("Token invalido")

@@ -15,12 +15,16 @@ export const UserService = {
     },
 
     findByEmail: async (email: string) => {
-        const user= await UserRepository.findByEmail(email);
+        const user = await UserRepository.findByEmail(email);
         if(!user) {
             throw new Error("Email invalido");
         }
         
         return user
+    },
+
+    findByID: async (id: string) => {
+        return await UserRepository.findByID(id);
     }
 
 }
