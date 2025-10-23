@@ -5,6 +5,8 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
+const authSecret = process.env.AUTH_SECRET!
+
 export const AuthService = {
     login: async (data: { email: string, password: string }) => {
         const user = await UserService.findByEmail(data.email);
@@ -14,9 +16,17 @@ export const AuthService = {
             throw new Error("Credenciais invalida")
         }
 
-        const secret = process.env.AUTH_SECRET!
-        const token = jwt.sign({ _id: user._id }, secret, { expiresIn: "1h"})
+        const token = jwt.sign({ _id: user._id }, authSecret, { expiresIn: "1h"})
 
         return { user, token };
+    },
+
+    verifyToken: (token: string) => {
+        try {
+            return jwt.verify(token, authSecret);
+        }
+        catch(err) {
+            throw new Error("Token invalido")
+        }
     }
 }
