@@ -1,5 +1,5 @@
-import { UserModel } from "@/model/user.model"
-import { User } from "@/types/user"
+import { UserModel } from "../model/user.model"
+import { User } from "../types/user"
 
 export const UserRepository = {
     
